@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Estudiante {
     private String nombre;
     private String apellido;
@@ -32,5 +34,15 @@ public class Estudiante {
     @Override
      public String toString(){
         return "Nombre: "+this.nombre+" "+this.apellido+", rut: "+this.rut+", número de matricula "+this.nMatricula;
+    }
+
+    public List buscarEstudianteNombre(String nombre) {
+    }
+
+    public boolean añadirEstudiante(String nombre, String apellido, String rut, String nMatricula) {
+        return false;
+    }
+
+    public boolean removerEstudiante(String nombre, String apellido, String rut, String nMatricula) {
     }
 }

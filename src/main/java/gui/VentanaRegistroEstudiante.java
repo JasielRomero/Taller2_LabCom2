@@ -3,7 +3,6 @@ package gui;
 import model.Estudiante;
 
 import javax.swing.*;
-import javax.swing.text.InternationalFormatter;
 import java.awt.event.ActionEvent;
 
 public class VentanaRegistroEstudiante extends Ventana {
@@ -65,7 +64,7 @@ public class VentanaRegistroEstudiante extends Ventana {
 
     private void generarCampoApellido() {
         String textoDireccion = "Apellido:";
-        super.generarJLabel(this.textoApellido, textoApellido, 20, 150, 150, 20);
+        super.generarJLabel(this.textoApellido, String.valueOf(textoApellido), 20, 150, 150, 20);
         this.campoApellido = super.generarJTextField(200, 150, 250, 20);
         this.add(this.campoApellido);
     }

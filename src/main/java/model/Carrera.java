@@ -14,6 +14,9 @@ public class Carrera {
         this.cantidadSemestres = cantidadSemestres;
     }
 
+    public static Object buscarEstudianteNombre(String nombre) {
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -113,5 +116,7 @@ public class Carrera {
         }
     }
 
+    public Carrera añadirCarrera(String nombre, String codigo, String cantidadSemestres) {
+    }
 }
 

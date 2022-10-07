@@ -1,8 +1,8 @@
 package Controller;
 
 import model.Carrera;
-import model.Estudiante;
 import model.CarrerasEstudiante;
+import model.Estudiante;
 
 import java.util.List;
 
@@ -10,16 +10,24 @@ public class UniversidadController {
     public static List buscarEstudiante(Estudiante estudiante, String nombre){
         return estudiante.buscarEstudianteNombre(nombre);
     }
-    public static Vehiculo agregarVehiculo(Automotora automotora, String nombre, ColorVehiculo color, MarcaVehiculo marca,
-                                           int año, int precio, double kmRecorridos){
-        return automotora.añadirVehiculo(nombre,color,marca,año,precio,kmRecorridos);
+    public static boolean agregarEstudiante(Estudiante estudiante, String nombre, String apellido, String rut,
+                                            String nMatricula){
+        return estudiante.añadirEstudiante(nombre,apellido,rut,nMatricula);
     }
-    public static boolean removerVehiculo(Automotora automotora, String nombre, int año){
-        return automotora.removerVehiculo(nombre,año);
+    public static boolean removerEstudiante(Estudiante estudiante, String nombre, String apellido, String rut, String nMatricula){
+        return estudiante.removerEstudiante(nombre, apellido, rut, nMatricula);
     }
-    public static void almacenarDatos(Automotora automotora){
-        GestorDatos.registrarDatos(automotora.getClientes(),"clientes.txt");
-        GestorDatos.registrarDatos(automotora.getVendedores(),"vendedores.txt");
-        GestorDatos.registrarDatos(automotora.getVehiculosAVenta(),"vehiculos.txt");
+    public static List buscarCarrera(Carrera carrera, String nombre){
+        return carrera.buscarEstudiantesCarrera(CarrerasEstudiante.valueOf(nombre));
+    }
+    public static Carrera agregarCarrera(Carrera carrera, String nombre, String codigo, String cantidadSemestres){
+        return carrera.añadirCarrera(nombre,codigo,cantidadSemestres);
+    }
+    public static boolean removerCarrera(Carrera carrera, String nombre, String codigo, String cantidadSemestres){
+        UniversidadController estudiante = new UniversidadController();
+        return estudiante.removerEstudiante(nombre, codigo, cantidadSemestres);
+    }
+
+    public static void almacenarDatos(Estudiante estudiante) {
     }
 }
