@@ -1,84 +1,86 @@
 package gui;
 
-import java.awt.*;
+import Controller.UniversidadController;
+import model.Estudiante;
+import model.Carrera;
+import gui.*;
+
 import javax.swing.*;
 import java.awt.event.*;
-import javax.swing.text.InternationalFormatter;
 
-public class VentanaBienvenida extends JFrame implements ActionListener{
-    private final Font fuenteTitulo;
-    private final Font fuenteTexto;
-    protected VentanaBienvenida(String nombre, int largoX, int largoY) {
-        super(nombre);
-        super.setVisible(true);
-        super.setDefaultCloseOperation(0);
-        super.setSize(largoX, largoY);
-        super.setLocationRelativeTo(null);
-        super.setResizable(false);
-        this.setLayout(null);
-        this.fuenteTitulo = new Font("Calibri", 3, 20);
-        this.fuenteTexto = new Font("Calibri", 1, 14);
-    }
-    protected void generarJLabelEncabezado(JLabel label, String texto, int posicionX, int posicionY, int largoX, int largoY){
-        label= new JLabel(texto);
-        label.setBounds(posicionX, posicionY, largoX, largoY);
-        label.setFont(this.fuenteTitulo);
-        this.add(label);
+public class VentanaBienvenida extends Ventana {
 
-    }
-    protected JButton generarBoton(String texto, int posicionX, int posicionY, int largoX, int largoY){
-        JButton boton= new JButton(texto);
-        boton.setBounds(posicionX, posicionY, largoX, largoY);
-        boton.setFont(this.fuenteTexto);
-        return boton;
-    }
-    protected void generarJLabel(JLabel label, String texto, int posicionX, int posicionY, int largoX, int largoY) {
-        label= new JLabel(texto);
-        label.setBounds(posicionX, posicionY, largoX, largoY);
-        label.setFont(this.fuenteTexto);
-        this.add(label);
+    private JLabel textoMenu;
+    private JButton botonRegistrarCarrera;
+    private JButton botonSalida;
+    private JButton botonRegistrarEstudiante;
+    private JButton botonBuscarEstudiante;
+    private Estudiante estudiante;
+
+    public VentanaBienvenida(Estudiante estudiante) {
+        super("Menu Intranet", 500, 520);
+        this.estudiante=estudiante;
+        generarElementosVentana();
     }
 
-    protected JFormattedTextField generarJFormattedTextField(InternationalFormatter formato, int posicionX, int posicionY, int largoX, int largoY){
-        JFormattedTextField textField=  new JFormattedTextField(formato);
-        textField.setBounds(posicionX, posicionY, largoX, largoY);
-        return textField;
+    private void generarElementosVentana() {
+        generarMensajeMenu();
+        generarBotonRegistrarCarrera();
+        generarBotonRegistrarEstudiante();
+        generarBotonBuscarEstudiante();
+        generarBotonSalir();
     }
 
-    protected InternationalFormatter generarFormato(int minimo){
-        InternationalFormatter formato=new InternationalFormatter();
-        formato.setMinimum(new Integer(minimo));
-
-
-        return formato;
-    }
-    protected InternationalFormatter generarFormato(int minimo, int maximo){
-        InternationalFormatter formato=new InternationalFormatter();
-        formato.setMinimum(new Integer(minimo));
-        formato.setMaximum(new Integer(maximo));
-
-        return formato;
-    }
-    protected JTextField generarJTextField(int posicionX, int posicionY, int largoX, int largoY){
-        JTextField textField= new JTextField();
-        textField.setBounds(posicionX, posicionY, largoX, largoY);
-        return textField;
-    }
-    protected JRadioButton generarJRadioButton(String texto, int posicionX, int posicionY, int largoX, int largoY){
-        JRadioButton boton= new JRadioButton(texto);
-        boton.setBounds(posicionX, posicionY, largoX, largoY);
-        return boton;
-    }
-    protected JComboBox generarListaDesplegable(Object[] datosLista, int posicionX, int posicionY, int largoX, int largoY){
-        JComboBox lista= new JComboBox(datosLista);
-        lista.setBounds(posicionX, posicionY, largoX, largoY);
-        return lista;
+    private void generarMensajeMenu() {
+        String textoBienvenida = "Intranet 2.0";
+        super.generarJLabelEncabezado(this.textoMenu, textoBienvenida, 20, 30, 500, 30);
     }
 
-    @Override
+    private void generarBotonRegistrarCarrera() {
+        String textoBoton = "Registrar Carrera";
+        this.botonRegistrarCarrera = super.generarBoton(textoBoton, 175, 100, 150, 40);
+        this.add(this.botonRegistrarCarrera);
+        this.botonRegistrarCarrera.addActionListener(this);
+    }
+    private void generarBotonSalir() {
+        String textoBoton = "Salir";
+        this.botonSalida = super.generarBoton(textoBoton, 175, 420, 150, 40);
+        this.add(this.botonSalida);
+        this.botonSalida.addActionListener(this);
+    }
+    private void generarBotonRegistrarEstudiante() {
+        String textoBoton = "Registrar Estudiante";
+        this.botonRegistrarEstudiante = super.generarBoton(textoBoton, 175, 180, 150, 40);
+        this.add(this.botonRegistrarEstudiante);
+        this.botonRegistrarEstudiante.addActionListener(this);
+    }
+    private void generarBotonBuscarEstudiante(){
+        String textoBoton = "Buscar Estudiante";
+        this.botonBuscarEstudiante=super.generarBoton(textoBoton, 175, 260, 150, 40);
+        this.add(this.botonBuscarEstudiante);
+        this.botonBuscarEstudiante.addActionListener(this);
+    }
+
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (e.getSource() == this.botonRegistrarCarrera) {
+            VentanaRegistroCarrera ventanaRegistroCarrera= new VentanaRegistroCarrera(estudiante);
+            this.dispose();
+        }
+        if(e.getSource() == this.botonRegistrarEstudiante){
+            VentanaRegistroEstudiante ventanaRegistroEstudiante= new VentanaRegistroEstudiante(estudiante);
+            this.dispose();
+        }
+        if(e.getSource() == this.botonBuscarEstudiante){
+            VentanaBusquedaEstudiante ventanaBusquedaEstudiante= new VentanaBusquedaEstudiante(estudiante);
+            this.dispose();
+        }
+
+        if(e.getSource() == this.botonSalida){
+            UniversidadController.almacenarDatos(this.estudiante);
+            this.dispose();
+            System.exit(0);
+        }
+
     }
 }
-
 

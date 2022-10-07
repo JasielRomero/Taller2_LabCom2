@@ -8,6 +8,12 @@ public class Carrera {
     private String codigo;
     private String cantidadSemestres;
 
+    public Carrera(String nombre, String codigo, String cantidadSemestres) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.cantidadSemestres = cantidadSemestres;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -31,6 +37,17 @@ public class Carrera {
     }
 
 
+    private List<Carrera> carrerasEstudiantes;
+
+    public List<Carrera> buscarEstudiantesCarrera(CarrerasEstudiante carrera) {
+        List<Carrera> carrera2 = new ArrayList<Carrera>();
+        for (Carrera carrera1 : this.carrerasEstudiantes) {
+            if (carrera1.getNombre().equals(nombre)) {
+                carrera2.add(carrera1);
+            }
+        }
+        return carrera2;
+    }
     private List<Estudiante> estudiantes;
 
     public Carrera(){
