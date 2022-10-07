@@ -1,1 +1,1 @@
-Taller2_LabCom2
+Taller2 Laboratorio Computación 2
